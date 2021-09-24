@@ -1,25 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import Header from "./components/Header";
+import Login from "./pages/Login";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import Home from "./pages/Home";
 
 function App() {
+  let [loggedUser, setloggedUser] = useState<boolean>(true);
+  useEffect(() => {
+    console.log(loggedUser);
+    if (loggedUser) {
+      let loggedUserJson = window.localStorage.getItem("loggedUser");
+      if (!loggedUserJson) {
+        console.log("no esta loggeado");
+        setloggedUser(false);
+      } else {
+        console.log("loggeado");
+
+        setloggedUser(true);
+      }
+    }
+  }, [loggedUser]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Header />
+      <Switch>
+        <Route path="/login">
+          <Login />
+        </Route>
+
+        <Route path="/">
+          {loggedUser ? <Home /> : <Redirect to="/login" />}
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
