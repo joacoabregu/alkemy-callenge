@@ -3,24 +3,14 @@ import axios from "axios";
 import { useFormik } from "formik";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-
-interface heroSearchResponse {
-  response: string;
-  "results-for": string;
-  results: [];
-}
-
-type FormSearchBarProps = {
-  setter: React.Dispatch<React.SetStateAction<[] | undefined>>;
-};
+import { heroSearchResponse } from "../types/interfaces";
+import { FormSearchBarProps } from "../types/types";
 
 const validate = (values: { search?: string }) => {
   const errors: { search?: string } = {};
-
   if (!values.search) {
     errors.search = "Required";
   }
-
   return errors;
 };
 
@@ -31,9 +21,7 @@ export default function FormSearchBar({ setter }: FormSearchBarProps) {
     },
     validate,
     onSubmit: (value) => {
-      
       let url = "/search/" + value.search;
-
       axios
         .get<heroSearchResponse>(url)
         .then((response) => {
