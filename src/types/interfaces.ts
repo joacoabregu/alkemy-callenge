@@ -9,9 +9,20 @@ export interface Hero {
     power: string;
     combat: string;
   };
-  biography: {};
-  appearance: {};
-  work: {};
+  biography: {
+    "full-name": string;
+    aliases: string[];
+  };
+  appearance: {
+    weight: [string, string];
+    height: [string, string];
+    "eye-color": string;
+    "hair-color": string;
+  };
+  work: {
+    occupation: string;
+    "work-base": string;
+  };
   connections: {};
   image: { url: string };
 }
