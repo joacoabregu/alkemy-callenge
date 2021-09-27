@@ -32,3 +32,12 @@ export interface heroSearchResponse {
   "results-for": string;
   results: [];
 }
+
+export interface Stats {
+  intelligence: string;
+  strength: string;
+  speed: string;
+  durability: string;
+  power: string;
+  combat: string;
+}
