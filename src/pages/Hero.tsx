@@ -5,6 +5,8 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Hero as HeroInterface } from "../types/interfaces";
+import { Hero as HeroComponent } from "../components/Hero";
+
 export default function Hero() {
   let [hero, setHero] = useState<HeroInterface>();
 
@@ -14,7 +16,7 @@ export default function Hero() {
     axios.get(url).then((response) => {
       let result = response.data;
       console.log(result);
-      setHero(result)
+      setHero(result);
     });
   }, [id]);
 
@@ -22,7 +24,7 @@ export default function Hero() {
     <Container fluid="sm">
       <Row>
         <Col>
-          <p>{hero ? <p> {hero.name}</p> : null} </p>
+          {hero ? <HeroComponent hero={hero} /> : null}
         </Col>
       </Row>
     </Container>
