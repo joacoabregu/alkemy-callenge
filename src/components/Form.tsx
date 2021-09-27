@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import axios from "axios";
 import { useFormik } from "formik";
 import Form from "react-bootstrap/Form";
@@ -18,10 +18,6 @@ const validate = (values: { email?: string; password?: string }) => {
 };
 
 export default function LoginForm() {
-  let [user, setUser] = useState();
-
-  
-
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -35,7 +31,6 @@ export default function LoginForm() {
           let data = response.data;
           console.log(data);
           window.localStorage.setItem("loggedUser", JSON.stringify(data));
-          setUser(data);
         })
         .catch((error) => {
           console.log(JSON.stringify(error.message));
@@ -82,37 +77,3 @@ export default function LoginForm() {
     </Form>
   );
 }
-
-/* <form onSubmit={formik.handleSubmit}>
-      <label htmlFor="email">Email</label>
-
-      <input
-        id="email"
-        name="email"
-        type="email"
-        placeholder="Email"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.email}
-      />
-
-      {formik.touched.email && formik.errors.email ? (
-        <div>{formik.errors.email}</div>
-      ) : null}
-
-      <label htmlFor="password">Password</label>
-
-      <input
-        id="password"
-        name="password"
-        type="password"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.password}
-      />
-      {formik.touched.password && formik.errors.password ? (
-        <div>{formik.errors.password}</div>
-      ) : null}
-
-      <button type="submit">Submit</button>
-    </form> */
