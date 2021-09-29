@@ -1,10 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import heroesTeamReducer from "./heroesTeamSlice";
-
+import countReducer from "./countSlice"
 
 export const store = configureStore({
   reducer: {
-      team: heroesTeamReducer,
+    team: heroesTeamReducer,
+    count: countReducer,
   },
 });
 
