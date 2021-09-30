@@ -14,9 +14,8 @@ export default function Login() {
           <FormSearchBar setter={setHeroes} />
         </Col>
       </Row>
-      <Row className="bg-light p-5 mt-5 mb-3 ">
-        {heroes ? <HeroesCard heroes={heroes} /> : null}
-      </Row>
+
+      {heroes ? <HeroesCard heroes={heroes} /> : null}
     </>
   );
 }

@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { RootState } from "../state/store";
 import Col from "react-bootstrap/esm/Col";
 import Alert from "react-bootstrap/esm/Alert";
+import Row from "react-bootstrap/esm/Row";
 
 export default function HeroesCard({ heroes }: Heroes) {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ export default function HeroesCard({ heroes }: Heroes) {
   }
 
   return (
-    <>
+    <Row className="bg-light p-5 mt-5 mb-3 ">
       {count.good >= 3 ? (
         <Alert variant="warning">No puedes agregar más heroes "Buenos"</Alert>
       ) : null}
@@ -49,8 +50,15 @@ export default function HeroesCard({ heroes }: Heroes) {
         }
 
         return (
-          <Col xs={12} md={6} xl={3} xxl={2} key={index}>
-            <Card style={{ width: "15rem" }} className="text-center">
+          <Col
+            xs={12}
+            md={6}
+            xl={3}
+            xxl={2}
+            key={index}
+            className="d-flex justify-content-center"
+          >
+            <Card style={{ width: "15rem" }} className="text-center mb-4 ">
               <Card.Img variant="top" src={hero.image.url} />
               <Card.Body>
                 <Card.Title className="mb-4">{hero.name} </Card.Title>
@@ -80,6 +88,6 @@ export default function HeroesCard({ heroes }: Heroes) {
           </Col>
         );
       })}
-    </>
+    </Row>
   );
 }
