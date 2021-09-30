@@ -10,7 +10,7 @@ type StatsKeys = keyof Stats;
 export default function TeamStatsTable() {
   let team = useSelector((state: RootState) => state.team.team);
   let [stats, setStats] = useState<Stats>();
-  console.log(stats);
+  
   useEffect(() => {
     let stats = {
       intelligence: "0",

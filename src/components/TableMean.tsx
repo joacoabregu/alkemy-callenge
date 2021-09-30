@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import Col from "react-bootstrap/esm/Col";
+import Row from "react-bootstrap/esm/Row";
 import Table from "react-bootstrap/Table";
 import { useSelector } from "react-redux";
 import { RootState } from "../state/store";
@@ -42,23 +44,27 @@ export default function TableMean() {
   }, [team]);
 
   return (
-    <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th></th>
-          <th>Promedio</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Altura</td>
-          <td> {mean?.height} </td>
-        </tr>
-        <tr>
-          <td>Peso</td>
-          <td>{mean?.weight}</td>
-        </tr>
-      </tbody>
-    </Table>
+    <Row className="justify-content-center">
+      <Col md={4}>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Medidas</th>
+              <th>Promedio</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Altura</td>
+              <td> {mean?.height} </td>
+            </tr>
+            <tr>
+              <td>Peso</td>
+              <td>{mean?.weight}</td>
+            </tr>
+          </tbody>
+        </Table>
+      </Col>
+    </Row>
   );
 }
