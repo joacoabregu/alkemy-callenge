@@ -38,7 +38,6 @@ export default function LoginForm() {
         .then((response) => {
           let data = response.data;
           window.localStorage.setItem("loggedUser", JSON.stringify(data));
-
           history.push("/home");
         })
         .catch((error) => {
