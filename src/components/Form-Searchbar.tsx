@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { heroSearchResponse } from "../types/interfaces";
 import { FormSearchBarProps } from "../types/types";
+import FormControl from "react-bootstrap/esm/FormControl";
 
 const validate = (values: { search?: string }) => {
   const errors: { search?: string } = {};
@@ -27,7 +28,6 @@ export default function FormSearchBar({ setter }: FormSearchBarProps) {
         .then((response) => {
           let { results } = response.data;
           setter(results);
-          console.log(results);
         })
         .catch((error) => {
           console.log(error);
@@ -36,9 +36,9 @@ export default function FormSearchBar({ setter }: FormSearchBarProps) {
   });
 
   return (
-    <Form onSubmit={formik.handleSubmit}>
-      <Form.Group className="mb-3" controlId="search">
-        <Form.Control
+    <>
+      <Form onSubmit={formik.handleSubmit} className="mb-1 d-flex">
+        <FormControl
           name="search"
           type="search"
           placeholder="Search"
@@ -48,13 +48,13 @@ export default function FormSearchBar({ setter }: FormSearchBarProps) {
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
         />
-        {formik.touched.search && formik.errors.search ? (
-          <Form.Text>{formik.errors.search}</Form.Text>
-        ) : null}
-      </Form.Group>
-      <Button variant="outline-success" type="submit">
-        Search
-      </Button>
-    </Form>
+        <Button variant="outline-success" type="submit">
+          Search
+        </Button>
+      </Form>
+      {formik.touched.search && formik.errors.search ? (
+        <Form.Text>{formik.errors.search}</Form.Text>
+      ) : null}
+    </>
   );
 }
