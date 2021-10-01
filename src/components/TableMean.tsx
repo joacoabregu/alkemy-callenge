@@ -60,11 +60,11 @@ export default function TableMean() {
           <tbody>
             <tr>
               <td>Altura</td>
-              <td> {mean?.height} </td>
+              <td> {mean?.height} cm. </td>
             </tr>
             <tr>
               <td>Peso</td>
-              <td>{mean?.weight}</td>
+              <td>{mean?.weight} kg.</td>
             </tr>
           </tbody>
         </Table>
