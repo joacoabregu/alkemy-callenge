@@ -5,6 +5,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { Alert } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import { setUserState } from "../state/loginSlice";
+import { useDispatch } from "react-redux";
 
 const validate = (values: { email?: string; password?: string }) => {
   const errors: { password?: string; email?: string } = {};
@@ -21,6 +23,8 @@ const validate = (values: { email?: string; password?: string }) => {
 
 export default function LoginForm() {
   let [isError, setIsError] = useState<boolean>(false);
+  let dispatch = useDispatch();
+
   let history = useHistory();
   const formik = useFormik({
     initialValues: {
@@ -38,6 +42,8 @@ export default function LoginForm() {
         .then((response) => {
           let data = response.data;
           window.localStorage.setItem("loggedUser", JSON.stringify(data));
+          dispatch(setUserState("login"));
+
           history.push("/home");
         })
         .catch((error) => {

@@ -1,13 +1,19 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
+import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { useHistory } from "react-router-dom";
+import { setUserState } from "../state/loginSlice";
+import { RootState } from "../state/store";
 
-export default function Header({ loggedUser }: { loggedUser: boolean }) {
+export default function Header() {
   let history = useHistory();
+  let loggedUser = useSelector((state: RootState) => state.user.user);
+  let dispatch = useDispatch();
   function logout() {
     window.localStorage.removeItem("loggedUser");
+    dispatch(setUserState("logout"));
     history.push("/login");
   }
   return (
@@ -30,11 +36,11 @@ export default function Header({ loggedUser }: { loggedUser: boolean }) {
           </Nav.Item>
         )}
       </div>
-      {loggedUser ? (
+      {loggedUser && (
         <Button variant="primary" type="button" onClick={logout}>
           Logout
         </Button>
-      ) : null}
+      ) }
     </Nav>
   );
 }

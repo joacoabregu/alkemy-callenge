@@ -7,8 +7,8 @@ import Form from "../components/Form";
 export default function Login() {
   return (
     <Container fluid="sm">
-      <Row>
-        <Col>
+      <Row className="justify-content-center">
+        <Col xs={3}>
           <Form />
         </Col>
       </Row>
