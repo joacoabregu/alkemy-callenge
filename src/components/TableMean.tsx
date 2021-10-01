@@ -34,8 +34,12 @@ export default function TableMean() {
 
     let meanArr = sumObjectsByKey(team);
     if (team.length) {
-      let meanWeight = (parseInt(meanArr.weight) / team.length).toString();
-      let meanHeight = (parseInt(meanArr.height) / team.length).toString();
+      let meanWeight = (parseInt(meanArr.weight) / team.length)
+        .toFixed(2)
+        .replace(/\.00$/, "");
+      let meanHeight = (parseInt(meanArr.height) / team.length)
+        .toFixed(2)
+        .replace(/\.00$/, "");
       let actualMean = { weight: meanWeight, height: meanHeight };
       setMean(actualMean);
     } else {
