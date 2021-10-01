@@ -29,12 +29,42 @@ export default function HeroesTeam({ heroes }: Heroes) {
               <Card.Img variant="top" src={hero.image.url} />
               <Card.Body>
                 <Card.Title>{hero.name} </Card.Title>
-                <p>Inteligencia: {hero.powerstats.intelligence} </p>
-                <p>Fuerza: {hero.powerstats.strength} </p>
-                <p>Velocidad: {hero.powerstats.speed} </p>
-                <p>Resistencia: {hero.powerstats.durability} </p>
-                <p>Poder: {hero.powerstats.power} </p>
-                <p>Combate: {hero.powerstats.combat} </p>
+                <p>
+                  Inteligencia:{" "}
+                  {hero.powerstats.intelligence === "null"
+                    ? "-"
+                    : hero.powerstats.intelligence}{" "}
+                </p>
+                <p>
+                  Fuerza:{" "}
+                  {hero.powerstats.strength === "null"
+                    ? "-"
+                    : hero.powerstats.strength}{" "}
+                </p>
+                <p>
+                  Velocidad:{" "}
+                  {hero.powerstats.speed === "null"
+                    ? "-"
+                    : hero.powerstats.speed}{" "}
+                </p>
+                <p>
+                  Resistencia:{" "}
+                  {hero.powerstats.durability === "null"
+                    ? "-"
+                    : hero.powerstats.durability}{" "}
+                </p>
+                <p>
+                  Poder:{" "}
+                  {hero.powerstats.power === "null"
+                    ? "-"
+                    : hero.powerstats.power}
+                </p>
+                <p>
+                  Combate:{" "}
+                  {hero.powerstats.combat === "null"
+                    ? "-"
+                    : hero.powerstats.combat}{" "}
+                </p>
 
                 <Link
                   className="btn btn-outline-light btn-dark"
