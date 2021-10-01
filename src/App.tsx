@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import "./App.css";
+import React, { useEffect } from "react";
 import Header from "./components/Header";
 import Login from "./pages/Login";
 import {
@@ -9,29 +8,35 @@ import {
   Redirect,
 } from "react-router-dom";
 import Home from "./pages/Home";
+import Hero from "./pages/Hero";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "./state/store";
+import { setUserState } from "./state/loginSlice";
 
 function App() {
-  let [loggedUser, setloggedUser] = useState<boolean>(true);
+  //let [loggedUser, setloggedUser] = useState<boolean>(true);
+  let loggedUser = useSelector((state: RootState) => state.user.user);
+  let dispatch = useDispatch();
   useEffect(() => {
-    console.log(loggedUser);
+    
     if (loggedUser) {
       let loggedUserJson = window.localStorage.getItem("loggedUser");
       if (!loggedUserJson) {
-        console.log("no esta loggeado");
-        setloggedUser(false);
+        dispatch(setUserState("logout"));
       } else {
-        console.log("loggeado");
-
-        setloggedUser(true);
+        dispatch(setUserState("login"));
       }
     }
-  }, [loggedUser]);
+  }, [loggedUser, dispatch]);
   return (
     <Router>
       <Header />
       <Switch>
         <Route path="/login">
           <Login />
+        </Route>
+        <Route path="/detail/:id">
+          <Hero />
         </Route>
 
         <Route path="/">
