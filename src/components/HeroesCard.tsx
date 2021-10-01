@@ -2,7 +2,7 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { Hero } from "../types/interfaces";
-import { Heroes } from "../types/types";
+import { HeroesCardsProps } from "../types/types";
 import { useDispatch, useSelector } from "react-redux";
 import { add } from "../state/heroesTeamSlice";
 import { add as addCount } from "../state/countSlice";
@@ -12,11 +12,10 @@ import Col from "react-bootstrap/esm/Col";
 import Alert from "react-bootstrap/esm/Alert";
 import Row from "react-bootstrap/esm/Row";
 
-export default function HeroesCard({ heroes }: Heroes) {
+export default function HeroesCard({ heroes, setter }: HeroesCardsProps) {
   const dispatch = useDispatch();
   let team = useSelector((state: RootState) => state.team.team);
   let count = useSelector((state: RootState) => state.count.count);
-  console.log(count);
 
   if (count.total >= 6) {
     return (
@@ -30,7 +29,13 @@ export default function HeroesCard({ heroes }: Heroes) {
   }
 
   return (
-    <Row className="bg-light p-5 mt-5 mb-3 ">
+    <Row className="bg-light p-5 mt-5 mb-3 position-relative">
+      <Button
+        type="button"
+        className="btn-close position-absolute top-0 end-0 m-2 p-2"
+        aria-label="Close"
+        onClick={() => setter([])}
+      ></Button>
       {count.good >= 3 ? (
         <Alert variant="warning">No puedes agregar más heroes "Buenos"</Alert>
       ) : null}

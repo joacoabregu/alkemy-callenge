@@ -4,6 +4,7 @@ import HeroesCard from "./HeroesCard";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
+
 export default function Login() {
   let [heroes, setHeroes] = useState<[]>();
 
@@ -15,7 +16,7 @@ export default function Login() {
         </Col>
       </Row>
 
-      {heroes ? <HeroesCard heroes={heroes} /> : null}
+      {heroes?.length ? <HeroesCard heroes={heroes} setter={setHeroes} /> : null}
     </>
   );
 }
