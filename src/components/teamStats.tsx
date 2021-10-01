@@ -10,7 +10,7 @@ type StatsKeys = keyof Stats;
 export default function TeamStatsTable() {
   let team = useSelector((state: RootState) => state.team.team);
   let [stats, setStats] = useState<Stats>();
-  
+
   useEffect(() => {
     let stats = {
       intelligence: "0",
@@ -25,7 +25,9 @@ export default function TeamStatsTable() {
         let power = b.powerstats;
         let k: StatsKeys;
         for (k in power) {
-          let result: number = parseInt(a[k]) + parseInt(power[k]);
+          let heroValue = parseInt(power[k]) || 0;
+
+          let result: number = parseInt(a[k]) + heroValue;
           a[k] = result.toString();
         }
         return a;
