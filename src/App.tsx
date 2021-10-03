@@ -14,18 +14,14 @@ import { RootState } from "./state/store";
 import { setUserState } from "./state/loginSlice";
 
 function App() {
-  //let [loggedUser, setloggedUser] = useState<boolean>(true);
   let loggedUser = useSelector((state: RootState) => state.user.user);
   let dispatch = useDispatch();
   useEffect(() => {
-    
-    if (loggedUser) {
-      let loggedUserJson = window.localStorage.getItem("loggedUser");
-      if (!loggedUserJson) {
-        dispatch(setUserState("logout"));
-      } else {
-        dispatch(setUserState("login"));
-      }
+    let loggedUserJson = window.localStorage.getItem("loggedUser");
+    if (!loggedUserJson) {
+      dispatch(setUserState("logout"));
+    } else {
+      dispatch(setUserState("login"));
     }
   }, [loggedUser, dispatch]);
   return (
