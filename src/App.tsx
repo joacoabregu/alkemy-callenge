@@ -11,19 +11,23 @@ import Home from "./pages/Home";
 import Hero from "./pages/Hero";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./state/store";
-import { setUserState } from "./state/loginSlice";
+import { login, logout } from "./state/loginSlice";
 
 function App() {
   let loggedUser = useSelector((state: RootState) => state.user.user);
   let dispatch = useDispatch();
+
   useEffect(() => {
-    let loggedUserJson = window.localStorage.getItem("loggedUser");
-    if (!loggedUserJson) {
-      dispatch(setUserState("logout"));
-    } else {
-      dispatch(setUserState("login"));
+    if (loggedUser) {
+      let loggedUserJson = window.localStorage.getItem("loggedUser");
+      if (!loggedUserJson) {
+        dispatch(logout());
+      } else {
+        dispatch(login());
+      }
     }
   }, [loggedUser, dispatch]);
+
   return (
     <Router>
       <Header />

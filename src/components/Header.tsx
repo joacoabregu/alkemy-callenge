@@ -4,16 +4,16 @@ import Nav from "react-bootstrap/Nav";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { useHistory } from "react-router-dom";
-import { setUserState } from "../state/loginSlice";
+import { logout } from "../state/loginSlice";
 import { RootState } from "../state/store";
 
 export default function Header() {
   let history = useHistory();
   let loggedUser = useSelector((state: RootState) => state.user.user);
   let dispatch = useDispatch();
-  function logout() {
+  function logoutUser() {
     window.localStorage.removeItem("loggedUser");
-    dispatch(setUserState("logout"));
+    dispatch(logout());
     history.push("/login");
   }
   return (
@@ -37,10 +37,10 @@ export default function Header() {
         )}
       </div>
       {loggedUser && (
-        <Button variant="primary" type="button" onClick={logout}>
+        <Button variant="primary" type="button" onClick={logoutUser}>
           Logout
         </Button>
-      ) }
+      )}
     </Nav>
   );
 }
