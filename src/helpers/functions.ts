@@ -2,6 +2,7 @@ import { Appearance, Hero, Stats } from "../types/interfaces";
 type AppearanceKeys = keyof Appearance;
 type StatsKeys = keyof Stats;
 
+// Calculate mean for a weight and height with a given length
 export function teamMean(
   weight: string,
   height: string,
@@ -10,27 +11,38 @@ export function teamMean(
   weight: string;
   height: string;
 } {
-  let meanWeight = (parseInt(weight) / length).toFixed(2).replace(/\.00$/, "");
-  let meanHeight = (parseInt(height) / length).toFixed(2).replace(/\.00$/, "");
+  // Return number in fixed point notation and remove trailing .00
+  let meanWeight: string = (parseInt(weight) / length)
+    .toFixed(2)
+    .replace(/\.00$/, "");
+  let meanHeight: string = (parseInt(height) / length)
+    .toFixed(2)
+    .replace(/\.00$/, "");
   return { weight: meanWeight, height: meanHeight };
 }
+
 let baseMean = {
   weight: "0",
   height: "0",
 };
-
-export const sumHeroesAppearance = (objs: Hero[]) => {
-  const res = objs.reduce((a, b) => {
-    let power = b.appearance;
+// Calculate total sum of weight and height from an array of Heroes. Use "baseMean" variable as initial Value
+export const sumHeroesAppearance = (
+  objs: Hero[]
+): {
+  weight: string;
+  height: string;
+} => {
+  const res = objs.reduce((total, hero) => {
+    let power = hero.appearance;
     let weight = power.weight[1];
     let height = power.height[1];
-    let base = { weight, height };
+    let heroAppearance = { weight, height };
     let k: AppearanceKeys;
-    for (k in base) {
-      let result: number = parseInt(a[k]) + parseInt(base[k]);
-      a[k] = result.toString();
+    for (k in heroAppearance) {
+      let result: number = parseInt(total[k]) + parseInt(heroAppearance[k]);
+      total[k] = result.toString();
     }
-    return a;
+    return total;
   }, baseMean);
   return res;
 };
@@ -43,17 +55,18 @@ let stats = {
   power: "0",
   combat: "0",
 };
+
+// Calculate total sum of powerstats from an array of Heroes. Use "stats" variable as Initial Value
 export const sumHeroesPowerStats = (objs: Hero[]) => {
-  const res = objs.reduce((a, b) => {
-    let power = b.powerstats;
+  const res = objs.reduce((total, hero) => {
+    let power = hero.powerstats;
     let k: StatsKeys;
     for (k in power) {
       let heroValue = parseInt(power[k]) || 0;
-
-      let result: number = parseInt(a[k]) + heroValue;
-      a[k] = result.toString();
+      let result: number = parseInt(total[k]) + heroValue;
+      total[k] = result.toString();
     }
-    return a;
+    return total;
   }, stats);
   return res;
 };
@@ -61,7 +74,6 @@ export const sumHeroesPowerStats = (objs: Hero[]) => {
 export function sortPowerStats(a: string[], b: string[]): 1 | -1 | 0 {
   let valueA = parseInt(a[1]);
   let valueB = parseInt(b[1]);
-
   if (valueA > valueB) {
     return -1;
   } else if (valueA < valueB) {
