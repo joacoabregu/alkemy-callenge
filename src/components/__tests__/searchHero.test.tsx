@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import { store } from "../../state/store";
 import { Router } from "react-router-dom";
 
-test("rendering and submitting a basic Formik form", async () => {
+test("required value to search hero", async () => {
   const history = createMemoryHistory();
   const component = render(
     <Provider store={store}>

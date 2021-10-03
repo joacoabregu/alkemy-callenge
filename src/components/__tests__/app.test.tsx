@@ -8,7 +8,7 @@ import { store } from "../../state/store";
 import "@testing-library/jest-dom";
 import { Provider } from "react-redux";
 describe("Verify user authorization", () => {
-  test("renders comment component", () => {
+  test("render app in login page", () => {
     const history = createMemoryHistory();
     render(
       <Provider store={store}>

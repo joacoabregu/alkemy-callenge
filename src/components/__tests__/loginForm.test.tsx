@@ -7,7 +7,7 @@ import { Router } from "react-router-dom";
 import { store } from "../../state/store";
 import { createMemoryHistory } from "history";
 
-test("rendering and submitting a basic Formik form", async () => {
+test("alert message with wrong credentials", async () => {
   const history = createMemoryHistory();
   const utils = render(
     <Provider store={store}>
