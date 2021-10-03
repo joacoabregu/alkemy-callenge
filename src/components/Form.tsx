@@ -12,10 +12,12 @@ const validate = (values: { email?: string; password?: string }) => {
   const errors: { password?: string; email?: string } = {};
 
   if (!values.password) {
-    errors.password = "Required";
+    errors.password = "Requerido";
   }
   if (!values.email) {
-    errors.email = "Required";
+    errors.email = "Requerido";
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = "Email inválido";
   }
 
   return errors;
@@ -24,8 +26,8 @@ const validate = (values: { email?: string; password?: string }) => {
 export default function LoginForm() {
   let [isError, setIsError] = useState<boolean>(false);
   let dispatch = useDispatch();
-
   let history = useHistory();
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -33,10 +35,7 @@ export default function LoginForm() {
     },
     validate,
     onSubmit: (values) => {
-      if (isError) {
-        setIsError(false);
-      }
-
+      setIsError(false);
       axios
         .post("http://challenge-react.alkemy.org/", values)
         .then((response) => {
@@ -54,7 +53,7 @@ export default function LoginForm() {
 
   return (
     <>
-      <Form onSubmit={formik.handleSubmit}>
+      <Form onSubmit={formik.handleSubmit} className="mb-3">
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email address</Form.Label>
           <Form.Control
@@ -85,13 +84,15 @@ export default function LoginForm() {
             <Form.Text>{formik.errors.password}</Form.Text>
           ) : null}
         </Form.Group>
-
         <Button variant="primary" type="submit">
           Enviar
         </Button>
       </Form>
+
       {isError ? (
-        <Alert variant="warning">Usuario y/o contraseña no válidos</Alert>
+        <Alert data-testid="alerta" variant="warning">
+          Usuario y/o contraseña no válidos
+        </Alert>
       ) : null}
     </>
   );
