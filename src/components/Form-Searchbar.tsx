@@ -7,6 +7,7 @@ import { heroSearchResponse } from "../types/interfaces";
 import { FormSearchBarProps } from "../types/types";
 import FormControl from "react-bootstrap/FormControl";
 import Alert from "react-bootstrap/Alert";
+import Spinner from "./Spinner";
 
 const validate = (values: { search?: string }) => {
   const errors: { search?: string } = {};
@@ -19,6 +20,7 @@ const validate = (values: { search?: string }) => {
 export default function FormSearchBar({ setter }: FormSearchBarProps) {
   let [searchError, setSearchError] = useState<boolean>(false);
   let [apiError, setApiError] = useState<boolean>(false);
+  let [loading, setLoading] = useState<boolean>(false);
   const formik = useFormik({
     initialValues: {
       search: "",
@@ -27,11 +29,13 @@ export default function FormSearchBar({ setter }: FormSearchBarProps) {
     onSubmit: (value) => {
       setSearchError(false);
       setApiError(false);
+      setLoading(true);
       let url = "/search/" + value.search;
       axios
         .get<heroSearchResponse>(url)
         .then((data) => {
           let { response } = data.data;
+          setLoading(false);
           if (response === "success") {
             let { results } = data.data;
             setter(results);
@@ -73,6 +77,7 @@ export default function FormSearchBar({ setter }: FormSearchBarProps) {
           Se ha producido un error en la base de datos. Vuelva a intentarlo
         </Alert>
       )}
+      {loading && <Spinner />}
     </>
   );
 }
