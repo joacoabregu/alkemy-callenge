@@ -7,8 +7,8 @@ import { useDispatch } from "react-redux";
 import { remove } from "../state/heroesTeamSlice";
 import { remove as removeCount } from "../state/countSlice";
 import { Link } from "react-router-dom";
-import Col from "react-bootstrap/esm/Col";
-import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 
 export default function HeroesTeam({ heroes }: Heroes) {
   const dispatch = useDispatch();

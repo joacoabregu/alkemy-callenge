@@ -1,6 +1,6 @@
 import React from "react";
-import Col from "react-bootstrap/esm/Col";
-import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 import Table from "react-bootstrap/Table";
 import { TableProps } from "../types/types";
 import { sortPowerStats } from "../helpers/functions";

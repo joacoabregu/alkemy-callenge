@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Col from "react-bootstrap/esm/Col";
-import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 import Table from "react-bootstrap/Table";
 import { useSelector } from "react-redux";
 import { RootState } from "../state/store";
