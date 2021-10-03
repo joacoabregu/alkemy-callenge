@@ -16,6 +16,8 @@ export default function HeroesTeam({ heroes }: Heroes) {
     <Row className="justify-content-center mb-5">
       {heroes.map((hero: Hero, index: number) => {
         let url = "/detail/" + hero.id;
+        let { intelligence, strength, speed, durability, power, combat } =
+          hero.powerstats;
         return (
           <Col
             xs={12}
@@ -30,44 +32,16 @@ export default function HeroesTeam({ heroes }: Heroes) {
               <Card.Body>
                 <Card.Title>{hero.name} </Card.Title>
                 <p>
-                  Inteligencia:{" "}
-                  {hero.powerstats.intelligence === "null"
-                    ? "-"
-                    : hero.powerstats.intelligence}{" "}
+                  Inteligencia: {intelligence === "null" ? "-" : intelligence}{" "}
                 </p>
-                <p>
-                  Fuerza:{" "}
-                  {hero.powerstats.strength === "null"
-                    ? "-"
-                    : hero.powerstats.strength}{" "}
-                </p>
-                <p>
-                  Velocidad:{" "}
-                  {hero.powerstats.speed === "null"
-                    ? "-"
-                    : hero.powerstats.speed}{" "}
-                </p>
-                <p>
-                  Resistencia:{" "}
-                  {hero.powerstats.durability === "null"
-                    ? "-"
-                    : hero.powerstats.durability}{" "}
-                </p>
-                <p>
-                  Poder:{" "}
-                  {hero.powerstats.power === "null"
-                    ? "-"
-                    : hero.powerstats.power}
-                </p>
-                <p>
-                  Combate:{" "}
-                  {hero.powerstats.combat === "null"
-                    ? "-"
-                    : hero.powerstats.combat}{" "}
-                </p>
+                <p>Fuerza: {strength === "null" ? "-" : strength} </p>
+                <p>Velocidad: {speed === "null" ? "-" : speed} </p>
+                <p>Resistencia: {durability === "null" ? "-" : durability} </p>
+                <p>Poder: {power === "null" ? "-" : power}</p>
+                <p>Combate: {combat === "null" ? "-" : combat} </p>
 
                 <Link
-                  className="btn btn-outline-light btn-dark"
+                  className="btn btn-outline-light btn-dark "
                   role="button"
                   to={url}
                 >
