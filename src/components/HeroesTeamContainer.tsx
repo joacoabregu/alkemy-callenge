@@ -11,7 +11,7 @@ export default function HeroesTeamContainer() {
   return (
     <>
       <HeroesTeam heroes={team} />
-      <h3>Estadísticas de tu equipo</h3>
+      <h3 className="text-center mb-3">Estadísticas de tu equipo</h3>
       <TeamStats />
       <TableMean />
     </>
