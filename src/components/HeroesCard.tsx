@@ -8,9 +8,10 @@ import { add } from "../state/heroesTeamSlice";
 import { add as addCount } from "../state/countSlice";
 import { Link } from "react-router-dom";
 import { RootState } from "../state/store";
-import Col from "react-bootstrap/esm/Col";
-import Alert from "react-bootstrap/esm/Alert";
-import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/Col";
+import Alert from "react-bootstrap/Alert";
+import Row from "react-bootstrap/Row";
+import HeroesLimitAlert from "./HeroesLimitAlert";
 
 export default function HeroesCard({ heroes, setter }: HeroesCardsProps) {
   const dispatch = useDispatch();
@@ -18,14 +19,7 @@ export default function HeroesCard({ heroes, setter }: HeroesCardsProps) {
   let count = useSelector((state: RootState) => state.count.count);
 
   if (count.total >= 6) {
-    return (
-      <Col>
-        <h3 className="text-center">
-          Tu equipo ya tiene 6 heroes no puedes agregar más. Puedes remover un
-          heroe de tu equipo para hacer lugar
-        </h3>
-      </Col>
-    );
+    return <HeroesLimitAlert />
   }
 
   return (
@@ -45,15 +39,12 @@ export default function HeroesCard({ heroes, setter }: HeroesCardsProps) {
 
       {heroes.map((hero: Hero, index: number) => {
         let url = "/detail/" + hero.id;
-
         if (count.good >= 3 && hero.biography.alignment === "good") {
           return null;
         }
-
         if (count.bad >= 3 && hero.biography.alignment !== "good") {
           return null;
         }
-
         return (
           <Col
             xs={12}
