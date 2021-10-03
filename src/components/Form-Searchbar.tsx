@@ -5,13 +5,13 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { heroSearchResponse } from "../types/interfaces";
 import { FormSearchBarProps } from "../types/types";
-import FormControl from "react-bootstrap/esm/FormControl";
-import Alert from "react-bootstrap/esm/Alert";
+import FormControl from "react-bootstrap/FormControl";
+import Alert from "react-bootstrap/Alert";
 
 const validate = (values: { search?: string }) => {
   const errors: { search?: string } = {};
   if (!values.search) {
-    errors.search = "Required";
+    errors.search = "Requerido";
   }
   return errors;
 };
