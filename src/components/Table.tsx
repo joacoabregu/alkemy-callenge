@@ -3,6 +3,7 @@ import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
 import Table from "react-bootstrap/Table";
 import { TableProps } from "../types/types";
+import { sortPowerStats } from "../helpers/functions";
 
 export default function StatsTable({ stats }: TableProps) {
   let tableData = [
@@ -13,18 +14,8 @@ export default function StatsTable({ stats }: TableProps) {
     ["Resistencia", stats.durability],
     ["Combate", stats.combat],
   ];
-  let orderData = tableData.sort(function (a, b) {
-    var valueA, valueB;
+  let orderData = tableData.sort(sortPowerStats);
 
-    valueA = parseInt(a[1]);
-    valueB = parseInt(b[1]);
-    if (valueA > valueB) {
-      return -1;
-    } else if (valueA < valueB) {
-      return 1;
-    }
-    return 0;
-  });
   return (
     <Row className="justify-content-center">
       <Col md={4}>
