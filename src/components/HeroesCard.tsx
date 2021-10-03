@@ -19,11 +19,11 @@ export default function HeroesCard({ heroes, setter }: HeroesCardsProps) {
   let count = useSelector((state: RootState) => state.count.count);
 
   if (count.total >= 6) {
-    return <HeroesLimitAlert />
+    return <HeroesLimitAlert />;
   }
 
   return (
-    <Row className="bg-light p-5 mt-5 mb-3 position-relative">
+    <Row className="bg-light p-5 mt-5 mb-3 position-relative justify-content-center">
       <Button
         type="button"
         className="btn-close position-absolute top-0 end-0 m-2 p-2"
