@@ -11,7 +11,12 @@ export interface Hero {
   };
   biography: {
     "full-name": string;
+    "alter-egos": string;
     aliases: string[];
+    "place-of-birth": string;
+    "first-appearance": string;
+    publisher: string;
+    alignment: string;
   };
   appearance: {
     weight: [string, string];
@@ -40,4 +45,9 @@ export interface Stats {
   durability: string;
   power: string;
   combat: string;
+}
+
+export interface Appearance {
+  weight: string;
+  height: string;
 }
