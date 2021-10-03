@@ -18,9 +18,7 @@ export default function HeroesSearch() {
 
       {heroes?.length ? (
         <HeroesCard heroes={heroes} setter={setHeroes} />
-      ) : (
-        <Spinner />
-      )}
+      ) : null}
     </>
   );
 }
